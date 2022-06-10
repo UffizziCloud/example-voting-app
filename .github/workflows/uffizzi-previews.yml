@@ -161,9 +161,9 @@ jobs:
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
-      username: admin@uffizzicloud.com
-      server: https://devops-pro-europe-2022.uffizzicloud.com/
-      project: default
+      username: adam@idyl.tech
+      server: https://app.uffizzi.com
+      project: my-application
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
