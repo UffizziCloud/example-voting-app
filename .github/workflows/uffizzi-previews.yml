@@ -18,17 +18,18 @@ jobs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
       - name: Login to DockerHub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
+          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: uffizzi/example-voting-app-vote
+          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-vote
       - name: Build and Push Image to Docker Hub
         uses: docker/build-push-action@v2
         with:
@@ -44,17 +45,18 @@ jobs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
       - name: Login to DockerHub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
+          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: uffizzi/example-voting-app-worker
+          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-worker
       - name: Build and Push Image to Docker Hub
         uses: docker/build-push-action@v2
         with:
@@ -70,17 +72,18 @@ jobs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
       - name: Login to DockerHub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
+          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: uffizzi/example-voting-app-result
+          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-result
       - name: Build and Push Image to Docker Hub
         uses: docker/build-push-action@v2
         with:
@@ -96,17 +99,18 @@ jobs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
       - name: Login to DockerHub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
+          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: uffizzi/example-voting-app-loadbalancer
+          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-loadbalancer
       - name: Build and Push Image to Docker Hub
         uses: docker/build-push-action@v2
         with:
