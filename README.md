@@ -5,6 +5,8 @@ A simple distributed application running across multiple Docker containers.
 
 This example was originally at https://github.com/dockersamples/example-voting-app
 
+It has been modified to demonstrate Continuous Previews on [Uffizzi](https://github.com/UffizziCloud/uffizzi_app).
+
 Getting started
 ---------------
 
