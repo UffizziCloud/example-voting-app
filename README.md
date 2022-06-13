@@ -10,6 +10,10 @@ It has been modified to demonstrate Continuous Previews on [Uffizzi](https://git
 Getting started
 ---------------
 
+## Uffizzi
+
+We recommend using the reusable workflow from the Uffizzi `preview-action.`
+
 ## Linux Containers
 
 The Linux stack uses Python, Node.js, .NET Core (or optionally Java), with Redis for messaging and Postgres for storage.
