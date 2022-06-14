@@ -14,6 +14,13 @@ io.set('transports', ['polling']);
 
 var port = process.env.PORT || 4000;
 
+// Environment variables for PostgreSQL connection
+var pghost = process.env.PGHOST || 'localhost';
+var pguser = process.env.PGUSER || 'postgres';
+var pgpassword = process.env.PGPASSWORD || 'postgres';
+var pgdatabase = process.env.PGDATABASE || 'postgres';
+var pgConnectionString = `postgres://${pguser}:${pgpassword}@${pghost}/${pgdatabase}`;
+
 io.sockets.on('connection', function (socket) {
 
   socket.emit('message', { text : 'Welcome!' });
@@ -24,8 +31,7 @@ io.sockets.on('connection', function (socket) {
 });
 
 var pool = new pg.Pool({
-  // changed to `localhost` from host `db`.
-  connectionString: 'postgres://postgres:postgres@localhost/postgres'
+  connectionString: pgConnectionString
 });
 
 async.retry(

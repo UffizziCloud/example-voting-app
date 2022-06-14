@@ -142,6 +142,10 @@ jobs:
           export RESULT_IMAGE
           LOADBALANCER_IMAGE=$(echo ${{ needs.build-loadbalancer.outputs.tags }})
           export LOADBALANCER_IMAGE
+          PGUSER=${{ secrets.PGUSER }}
+          export PGUSER
+          PGPASSWORD=${{ secrets.PGPASSWORD }}
+          export PGPASSWORD
           # Render simple template from environment variables.
           envsubst < docker-compose.template.yml > docker-compose.rendered.yml
           cat docker-compose.rendered.yml
