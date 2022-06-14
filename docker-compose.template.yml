@@ -29,6 +29,7 @@ services:
     image: "${RESULT_IMAGE}"
     environment:
       PGUSER: "${PGUSER}"
+      PGDATABASE: "${PGUSER}"
       PGPASSWORD: "${PGPASSWORD}"
       PORT: 8088
 
