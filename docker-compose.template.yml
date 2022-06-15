@@ -12,11 +12,14 @@ services:
   postgres:
     image: postgres:9.6
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: "${PGUSER}"
+      POSTGRES_PASSWORD: "${PGPASSWORD}"
 
   worker:
     image: "${WORKER_IMAGE}"
+    environment:
+      PGUSER: "${PGUSER}"
+      PGPASSWORD: "${PGPASSWORD}"
     deploy:
       resources:
         limits:
@@ -25,6 +28,9 @@ services:
   result:
     image: "${RESULT_IMAGE}"
     environment:
+      PGUSER: "${PGUSER}"
+      PGDATABASE: "${PGUSER}"
+      PGPASSWORD: "${PGPASSWORD}"
       PORT: 8088
 
   vote:
