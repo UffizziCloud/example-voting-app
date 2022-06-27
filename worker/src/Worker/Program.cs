@@ -104,6 +104,19 @@ namespace Worker
                                     )";
             command.ExecuteNonQuery();
 
+            using (var cmd = new NpgsqlCommand(@"INSERT INTO votes (id, vote) VALUES
+                                    ('fake1', 'a'),
+                                    ('fake2', 'a'),
+                                    ('fake3', 'a'),
+                                    ('fake4', 'b'),
+                                    ('fake5', 'b'),
+                                    ('fake6', 'b'),
+                                    ('fake7', 'b')
+                                    ", connection))
+            {
+                cmd.ExecuteNonQuery();
+            }
+
             return connection;
         }
 
