@@ -14,6 +14,10 @@ services:
     environment:
       POSTGRES_USER: "${PGUSER}"
       POSTGRES_PASSWORD: "${PGPASSWORD}"
+    deploy:
+      resources:
+        limits:
+          memory: 500M
 
   worker:
     image: "${WORKER_IMAGE}"
