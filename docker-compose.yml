@@ -6,12 +6,12 @@ services:
   vote:
     build: ./vote
     # use python rather than gunicorn for local dev
-    command: python app.py
+    command: wait-for-it --strict --timeout=60 redis:6379 -- python app.py
     environment:
       REDIS_HOST: "redis"
     depends_on:
       redis:
-        condition: service_healthy 
+        condition: service_healthy
     volumes:
      - ./vote:/app
     ports:
@@ -23,7 +23,7 @@ services:
   result:
     build: ./result
     # use nodemon rather than node for local dev
-    command: nodemon server.js
+    command: wait-for-it --strict --timeout=60 db:5432 -- nodemon server.js
     environment:
       PGUSER: "postgres"
       PGHOST: "db"
@@ -31,7 +31,7 @@ services:
       PGDATABASE: "postgres"
     depends_on:
       db:
-        condition: service_healthy 
+        condition: service_healthy
     volumes:
       - ./result:/app
     ports:
@@ -81,6 +81,12 @@ services:
       interval: "5s"
     networks:
       - back-tier
+
+  loadbalancer:
+    build:
+      context: ./loadbalancer
+    networks:
+      - front-tier
 
 volumes:
   db-data:
