@@ -30,9 +30,6 @@ services:
       PGHOST: "db"
       PGPASSWORD: "postgres"
       PGDATABASE: "postgres"
-    depends_on:
-      db:
-        condition: service_healthy
     volumes:
       - ./result:/app
     ports:
