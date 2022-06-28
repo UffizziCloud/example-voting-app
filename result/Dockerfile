@@ -32,4 +32,4 @@ ENV PGHOST localhost
 
 EXPOSE 80
 
-CMD ["sh", "-c", "wait-for-it --strict --timeout=60 ${PGHOST}:5432 -- /tini -- node server.js"]
+CMD ["/tini", "--", "node", "server.js"]
