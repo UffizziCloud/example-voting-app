@@ -22,7 +22,9 @@ namespace Worker
 
                 var pgConnString = $"Server={pghost};Username={pguser};Password={pgpassword};";
                 var pgsql = OpenDbConnection(pgConnString);
-                var redisConn = OpenRedisConnection("localhost");
+
+                var redisHost = Environment.GetEnvironmentVariable("REDIS_HOST") ?? "localhost";
+                var redisConn = OpenRedisConnection(redisHost);
                 var redis = redisConn.GetDatabase();
 
                 // Keep alive is not implemented in Npgsql yet. This workaround was recommended:
@@ -104,17 +106,33 @@ namespace Worker
                                     )";
             command.ExecuteNonQuery();
 
+            // Seed database with example votes.
             using (var cmd = new NpgsqlCommand(@"INSERT INTO votes (id, vote) VALUES
                                     ('fake1', 'a'),
                                     ('fake2', 'a'),
                                     ('fake3', 'a'),
-                                    ('fake4', 'b'),
-                                    ('fake5', 'b'),
-                                    ('fake6', 'b'),
-                                    ('fake7', 'b')
+                                    ('fake4', 'a'),
+                                    ('fake5', 'a'),
+                                    ('fake6', 'a'),
+                                    ('fake7', 'a'),
+                                    ('fake8', 'b'),
+                                    ('fake9', 'b'),
+                                    ('fake10', 'b'),
+                                    ('fake11', 'b'),
+                                    ('fake12', 'b'),
+                                    ('fake13', 'b'),
+                                    ('fake14', 'b'),
+                                    ('fake15', 'b')
                                     ", connection))
             {
-                cmd.ExecuteNonQuery();
+                try {
+                        cmd.ExecuteNonQuery();
+                }
+                catch (PostgresException)
+                {
+                        Console.Error.WriteLine("db already seeded");
+                }
+
             }
 
             return connection;
