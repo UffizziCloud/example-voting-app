@@ -49,6 +49,11 @@ async.retry(
       return console.error("Giving up");
     }
     console.log("Connected to db");
+    // Open HTTP server after we're connected to database.
+    server.listen(port, function () {
+      var port = server.address().port;
+      console.log('App running on port ' + port);
+    });
     getVotes(client);
   }
 );
@@ -90,9 +95,4 @@ app.use(express.static(__dirname + '/views'));
 
 app.get('/', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/views/index.html'));
-});
-
-server.listen(port, function () {
-  var port = server.address().port;
-  console.log('App running on port ' + port);
 });

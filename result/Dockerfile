@@ -1,9 +1,11 @@
 FROM node:10-slim
 
 # add curl for healthcheck
+# add wait-for-it to delay start
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     curl \
+    wait-for-it \
     && rm -rf /var/lib/apt/lists/*
 
 # Add Tini for proper init of signals
@@ -25,6 +27,8 @@ RUN npm ci \
 COPY . .
 
 ENV PORT 80
+
+ENV PGHOST localhost
 
 EXPOSE 80
 
