@@ -29,7 +29,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/${{ github.repostitory_owner }}/example-voting-vote
+          images: ghcr.io/${{ github.repository_owner }}/example-voting-vote
       - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
@@ -56,7 +56,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/${{ github.repostitory_owner }}/example-voting-worker
+          images: ghcr.io/${{ github.repository_owner }}/example-voting-worker
       - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
@@ -83,7 +83,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/${{ github.repostitory_owner }}/example-voting-result
+          images: ghcr.io/${{ github.repository_owner }}/example-voting-result
       - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
@@ -110,7 +110,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/${{ github.repostitory_owner }}/example-voting-loadbalancer
+          images: ghcr.io/${{ github.repository_owner }}/example-voting-loadbalancer
       - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
