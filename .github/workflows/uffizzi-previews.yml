@@ -17,20 +17,20 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to DockerHub
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
-          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-vote
-      - name: Build and Push Image to Docker Hub
+          images: ghcr.io/${{ github.actor }}/example-voting-vote
+      - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -44,20 +44,20 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to DockerHub
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
-          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-worker
-      - name: Build and Push Image to Docker Hub
+          images: ghcr.io/${{ github.actor }}/example-voting-worker
+      - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -71,20 +71,20 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to DockerHub
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
-          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-result
-      - name: Build and Push Image to Docker Hub
+          images: ghcr.io/${{ github.actor }}/example-voting-result
+      - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -98,20 +98,20 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to DockerHub
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
-          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-loadbalancer
-      - name: Build and Push Image to Docker Hub
+          images: ghcr.io/${{ github.actor }}/example-voting-loadbalancer
+      - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
           push: true
