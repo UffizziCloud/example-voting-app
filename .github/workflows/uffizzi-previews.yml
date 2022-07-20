@@ -171,8 +171,8 @@ jobs:
       project: test-passwords-w9yz
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
-      url_username: usernames
-      url_password: passwords
+      url-username: usernames
+      url-password: passwords
     permissions:
       contents: read
       pull-requests: write
