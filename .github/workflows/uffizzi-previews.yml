@@ -18,20 +18,20 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to Docker Registry
+      - name: Login to Container Registry
         uses: docker/login-action@v2
         with:
-          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-vote
-      - name: Build and Push Image to Docker Hub
+          images: ghcr.io/${{ github.repository_owner }}/example-voting-vote
+      - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -46,20 +46,20 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to Docker Registry
+      - name: Login to Container Registry
         uses: docker/login-action@v2
         with:
-          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-worker
-      - name: Build and Push Image to Docker Hub
+          images: ghcr.io/${{ github.repository_owner }}/example-voting-worker
+      - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -74,20 +74,20 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to Docker Registry
+      - name: Login to Container Registry
         uses: docker/login-action@v2
         with:
-          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-result
-      - name: Build and Push Image to Docker Hub
+          images: ghcr.io/${{ github.repository_owner }}/example-voting-result
+      - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -102,20 +102,20 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to Docker Registry
+      - name: Login to Container Registry
         uses: docker/login-action@v2
         with:
-          registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: 263049488290.dkr.ecr.us-east-1.amazonaws.com/example-voting-loadbalancer
-      - name: Build and Push Image to Docker Hub
+          images: ghcr.io/${{ github.repository_owner }}/example-voting-loadbalancer
+      - name: Build and Push Image to GitHub Container Registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -166,7 +166,7 @@ jobs:
   deploy-uffizzi-preview:
     name: Use Remote Workflow to Preview on Uffizzi
     needs: render-compose-file
-    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@v2.1.0
+    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@add_credentials
     if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' }}
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
@@ -178,6 +178,7 @@ jobs:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
       url-username: admin
       url-password: ${{ secrets.URL_PASSWORD }}
+      personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
     permissions:
       contents: read
       pull-requests: write
