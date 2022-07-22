@@ -17,7 +17,7 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to DockerHub
+      - name: Login to Docker Registry
         uses: docker/login-action@v2
         with:
           registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
@@ -44,7 +44,7 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to DockerHub
+      - name: Login to Docker Registry
         uses: docker/login-action@v2
         with:
           registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
@@ -71,7 +71,7 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to DockerHub
+      - name: Login to Docker Registry
         uses: docker/login-action@v2
         with:
           registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
@@ -98,7 +98,7 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to DockerHub
+      - name: Login to Docker Registry
         uses: docker/login-action@v2
         with:
           registry: 263049488290.dkr.ecr.us-east-1.amazonaws.com
@@ -161,16 +161,18 @@ jobs:
   deploy-uffizzi-preview:
     name: Use Remote Workflow to Preview on Uffizzi
     needs: render-compose-file
-    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@reusable-workflow
+    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@url_authentication
     if: github.event_name == 'pull_request'
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
-      username: josh@idyl.tech
+      username: adam+1@idyl.tech
       server: https://app.uffizzi.com
-      project: vote-app-latest-m57p
+      project: test-passwords-w9yz
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
+      url-username: admin
+      url-password: ${{ secrets.URL_PASSWORD }}
     permissions:
       contents: read
       pull-requests: write
