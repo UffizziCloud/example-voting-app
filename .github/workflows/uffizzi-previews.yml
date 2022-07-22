@@ -14,10 +14,11 @@ jobs:
   build-vote:
     name: Build and Push `vote`
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.event.action != 'closed' }}
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to GitHub Container Registry
+      - name: Login to Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -41,10 +42,11 @@ jobs:
   build-worker:
     name: Build and Push `worker`
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.event.action != 'closed' }}
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to GitHub Container Registry
+      - name: Login to Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -68,10 +70,11 @@ jobs:
   build-result:
     name: Build and Push `result`
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.event.action != 'closed' }}
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to GitHub Container Registry
+      - name: Login to Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -95,10 +98,11 @@ jobs:
   build-loadbalancer:
     name: Build and Push `loadbalancer`
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.event.action != 'closed' }}
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to GitHub Container Registry
+      - name: Login to Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -122,6 +126,7 @@ jobs:
   render-compose-file:
     name: Render Docker Compose File
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.event.action != 'closed' }}
     needs: 
       - build-vote
       - build-worker
@@ -161,14 +166,32 @@ jobs:
   deploy-uffizzi-preview:
     name: Use Remote Workflow to Preview on Uffizzi
     needs: render-compose-file
-    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@reusable-workflow
-    if: github.event_name == 'pull_request'
+    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@v2.1.0
+    if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' }}
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
-      username: adam@idyl.tech
+      username: adam+1@idyl.tech
       server: https://app.uffizzi.com
-      project: my-application
+      project: test-passwords-w9yz
+    secrets:
+      password: ${{ secrets.UFFIZZI_PASSWORD }}
+      url-username: admin
+      url-password: ${{ secrets.URL_PASSWORD }}
+    permissions:
+      contents: read
+      pull-requests: write
+
+  delete-uffizzi-preview:
+    name: Use Remote Workflow to Delete an Existing Preview
+    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@v2.1.0
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
+    with:
+      compose-file-cache-key: ''
+      compose-file-cache-path: docker-compose.rendered.yml
+      username: adam+1@idyl.tech
+      server: https://app.uffizzi.com
+      project: test-passwords-w9yz
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
