@@ -9,6 +9,7 @@ import logging
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
 redis_host = os.getenv('REDIS_HOST', "localhost")
+uffizzi_url = os.getenv('UFFIZZI_URL', "")
 hostname = socket.gethostname()
 
 app = Flask(__name__)
@@ -42,6 +43,7 @@ def hello():
         option_a=option_a,
         option_b=option_b,
         hostname=hostname,
+        uffizzi_url=uffizzi_url,
         vote=vote,
     ))
     resp.set_cookie('voter_id', voter_id)

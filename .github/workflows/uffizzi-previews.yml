@@ -173,7 +173,7 @@ jobs:
       compose-file-cache-path: docker-compose.rendered.yml
       username: adam+1@idyl.tech
       server: https://app.uffizzi.com
-      project: test-passwords-w9yz
+      project: my-application-c2e3
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
       url-username: admin
@@ -192,7 +192,7 @@ jobs:
       compose-file-cache-path: docker-compose.rendered.yml
       username: adam+1@idyl.tech
       server: https://app.uffizzi.com
-      project: test-passwords-w9yz
+      project: my-application-c2e3
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
