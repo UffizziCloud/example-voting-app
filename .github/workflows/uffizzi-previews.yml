@@ -197,7 +197,7 @@ jobs:
           JWT=$(echo $OIDC_TOKEN | jq -j '.value')
           echo $JWT
           jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${JWT}"
-          echo TOKEN="$(echo "$OIDC_TOKEN" | base64)"
+          export TOKEN="$(echo "$OIDC_TOKEN" | base64)"
           echo "::set-output name=id_token_base64::${TOKEN}"
     permissions:
       id-token: write
