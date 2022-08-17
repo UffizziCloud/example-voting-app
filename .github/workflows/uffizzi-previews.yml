@@ -195,9 +195,8 @@ jobs:
         run: |
           OIDC_TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=uffizzi" -H "User-Agent: actions/oidc-client" -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN")
           JWT=$(echo $OIDC_TOKEN | jq -j '.value')
-          echo $JWT
           jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${JWT}"
-          export TOKEN="$(echo "$OIDC_TOKEN" | base64)"
+          export TOKEN="$(echo "$JWT" | base64)"
           echo "::set-output name=id_token_base64::${TOKEN}"
     permissions:
       id-token: write
