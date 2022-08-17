@@ -207,8 +207,7 @@ jobs:
     needs: get-oidc-token
     runs-on: ubuntu-latest
     steps:
-      echo:
-        - run: echo "${{ needs.get-oidc-token.outputs.oidc-token-base64 }}"
+      - run: echo "${{ needs.get-oidc-token.outputs.oidc-token-base64 }}"
 
   deploy-uffizzi-preview:
     name: Use Remote Workflow to Preview on Uffizzi
