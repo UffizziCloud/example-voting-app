@@ -179,7 +179,7 @@ jobs:
         uses: moklidia/uffizzi-auth@main
         with:
           oidc-token: ${{ steps.oidc-token.outputs.id_token }}
-          server: https://deployment-4991-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com
+          server: https://3948-62-4-33-119.ngrok.io
     permissions:
       id-token: write
 
@@ -193,7 +193,7 @@ jobs:
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
-      server: https://deployment-4991-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com
+      server: https://3948-62-4-33-119.ngrok.io
       oidc-token: ${{ needs.get-uffizzi-access-token.outputs.access-token }}
     secrets:
       url-username: admin
