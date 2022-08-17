@@ -202,6 +202,12 @@ jobs:
     permissions:
       id-token: write
 
+  check-outputs:
+    name: Check token output
+    needs: get-oidc-token
+    runs-on: ubuntu-latest
+    run: echo "${{ needs.get-oidc-token.outputs.oidc-token-base64 }}"
+
   deploy-uffizzi-preview:
     name: Use Remote Workflow to Preview on Uffizzi
     needs:
