@@ -177,6 +177,8 @@ jobs:
       url-username: admin
       url-password: ${{ secrets.URL_PASSWORD }}
       personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
+      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
     permissions:
       contents: read
       pull-requests: write
