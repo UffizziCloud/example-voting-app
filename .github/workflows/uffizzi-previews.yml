@@ -185,7 +185,9 @@ jobs:
 
   deploy-uffizzi-preview:
     name: Use Remote Workflow to Preview on Uffizzi
-    needs: render-compose-file
+    needs:
+      - render-compose-file
+      - get-uffizzi-access-token
     uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@feature/#9_automatic_account_creation
     if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' }}
     with:
