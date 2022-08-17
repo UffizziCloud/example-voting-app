@@ -172,7 +172,7 @@ jobs:
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
-      server: https://6e95-62-4-33-119.ngrok.io
+      server: https://deployment-4996-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com
     secrets:
       url-username: admin
       url-password: ${{ secrets.URL_PASSWORD }}
@@ -190,7 +190,7 @@ jobs:
       compose-file-cache-key: ''
       compose-file-cache-path: docker-compose.rendered.yml
       username: adam+1@idyl.tech
-      server: https://6e95-62-4-33-119.ngrok.io
+      server: https://deployment-4996-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com
       project: my-application-c2e3
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
