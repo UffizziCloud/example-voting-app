@@ -164,6 +164,7 @@ jobs:
           key: ${{ steps.hash.outputs.hash }}
   get-uffizzi-access-token:
     name: Obtain an OIDC token from GHA and authenticate in Uffizzi
+    runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
     outputs:
       access-token: ${{ steps.access-token.outputs.access_token }}
