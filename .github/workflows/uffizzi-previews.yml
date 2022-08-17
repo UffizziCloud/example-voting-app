@@ -188,7 +188,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
     outputs:
-      oidc-token: ${{ steps.oidc-token.outputs.id_token }}
+      oidc-token-base64: ${{ steps.oidc-token.outputs.id_token_base64 }}
     steps:
       - name: Obtain an OIDC token from GHA
         id: oidc-token
@@ -197,7 +197,8 @@ jobs:
           JWT=$(echo $OIDC_TOKEN | jq -j '.value')
           echo $JWT
           jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${JWT}"
-          echo "::set-output name=id_token::${OIDC_TOKEN}"
+          echo TOKEN="$(echo "$OIDC_TOKEN" | base64)"
+          echo "::set-output name=id_token_base64::${TOKEN}"
     permissions:
       id-token: write
 
@@ -212,7 +213,7 @@ jobs:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
       server: https://3948-62-4-33-119.ngrok.io
-      oidc-token: ${{ needs.get-oidc-token.outputs.oidc-token }}
+      oidc-token: ${{ needs.get-oidc-token.outputs.oidc-token-base64 }}
     secrets:
       url-username: admin
       url-password: ${{ secrets.URL_PASSWORD }}
