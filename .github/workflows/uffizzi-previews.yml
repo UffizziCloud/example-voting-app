@@ -183,18 +183,36 @@ jobs:
   #   permissions:
   #     id-token: write
 
+  get-oidc-token:
+    name: Obtain an OIDC token from GHA
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    outputs:
+      oidc-token: ${{ steps.oidc-token.outputs.id_token }}
+    steps:
+      - name: Obtain an OIDC token from GHA
+        id: oidc-token
+        run: |
+          OIDC_TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=uffizzi" -H "User-Agent: actions/oidc-client" -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN")
+          JWT=$(echo $OIDC_TOKEN | jq -j '.value')
+          echo $JWT
+          jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${JWT}"
+          echo "::set-output name=id_token::${OIDC_TOKEN}"
+    permissions:
+      id-token: write
+
   deploy-uffizzi-preview:
     name: Use Remote Workflow to Preview on Uffizzi
     needs:
       - render-compose-file
-      # - get-uffizzi-access-token
+      - get-oidc-token
     uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@feature/#9_automatic_account_creation
     if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' }}
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
       server: https://3948-62-4-33-119.ngrok.io
-      oidc-token: $ACTIONS_ID_TOKEN_REQUEST_TOKEN
+      oidc-token: ${{ needs.get-oidc-token.outputs.oidc-token }}
     secrets:
       url-username: admin
       url-password: ${{ secrets.URL_PASSWORD }}
