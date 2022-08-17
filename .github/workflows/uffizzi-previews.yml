@@ -179,8 +179,8 @@ jobs:
         with:
           oidc-token: ${{ steps.oidc-token.outputs.id_token }}
           server: https://deployment-4991-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com
-  permissions:
-    id-token: write
+    permissions:
+      id-token: write
 
   deploy-uffizzi-preview:
     name: Use Remote Workflow to Preview on Uffizzi
