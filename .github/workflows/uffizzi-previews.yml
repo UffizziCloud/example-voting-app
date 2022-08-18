@@ -191,9 +191,7 @@ jobs:
     with:
       compose-file-cache-key: ''
       compose-file-cache-path: docker-compose.rendered.yml
-      username: adam+1@idyl.tech
       server: https://deployment-4996-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com
-      project: my-application-c2e3
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
