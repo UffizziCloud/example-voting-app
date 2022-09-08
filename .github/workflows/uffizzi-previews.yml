@@ -167,7 +167,7 @@ jobs:
     name: Use Remote Workflow to Preview on Uffizzi
     needs:
       - render-compose-file
-    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@v2
+    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@feature/16_add_credentials_input
     if: ${{ github.event_name == 'pull_request' && github.event.action != 'closed' }}
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
@@ -179,6 +179,12 @@ jobs:
       personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
       dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      acr-username: ${{ secrets.ACR_USERNAME }}
+      acr-password: ${{ secrets.ACR_PASSWORD }}
+      acr-registry-url: ${{ secrets.ACR_REGISTRY_URL }}
+      aws-secret-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      aws-registry-url: ${{ secrets.AWS_REGISTRY_URL }}
     permissions:
       contents: read
       pull-requests: write
