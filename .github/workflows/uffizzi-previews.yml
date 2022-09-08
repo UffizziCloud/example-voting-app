@@ -182,7 +182,7 @@ jobs:
       acr-username: ${{ secrets.ACR_USERNAME }}
       acr-password: ${{ secrets.ACR_PASSWORD }}
       acr-registry-url: ${{ secrets.ACR_REGISTRY_URL }}
-      aws-secret-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       aws-registry-url: ${{ secrets.AWS_REGISTRY_URL }}
     permissions:
