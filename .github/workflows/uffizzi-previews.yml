@@ -192,7 +192,7 @@ jobs:
 
   delete-uffizzi-preview:
     name: Use Remote Workflow to Delete an Existing Preview
-    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@v2
+    uses: UffizziCloud/preview-action/.github/workflows/reusable.yaml@feature/16_add_credentials_input
     if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
     with:
       compose-file-cache-key: ''
