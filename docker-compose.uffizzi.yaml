@@ -1,7 +1,7 @@
 # Uffizzi extension
 x-uffizzi:
   ingress:
-    service: guestbook
+    service: app
     port: 8080
   continuous_previews:
     deploy_preview_when_pull_request_is_opened: true
@@ -9,18 +9,21 @@ x-uffizzi:
     share_to_github: true
 
 services:
-  redis:
-    image: redis:latest
-    deploy:
-      resources:
-        limits:
-          memory: 125M
-
-  guestbook:
-    build: .
+  app:
+  image: "${APP_IMAGE}"
+    build:
+      context: https://github.com/grojas2525/example-voting-app
+      dockerfile: Dockerfile
     environment:
-      REDIS_HOST: localhost
+      PGUSER: "postgres"
+      PGPASSWORD: "postgres"
     deploy:
       resources:
         limits:
-          memory: 125M
+          memory: 250M
+
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
