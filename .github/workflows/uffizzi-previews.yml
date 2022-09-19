@@ -172,14 +172,13 @@ jobs:
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
-      server: https://app.uffizzi.com/
+      server: https://deployment-5843-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com
     secrets:
       url-username: admin
       url-password: ${{ secrets.URL_PASSWORD }}
       personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
       dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      gcloud-service-key: ${{ secrets.GCLOUD_SERVICE_KEY }}
       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       aws-registry-url: ${{ secrets.AWS_REGISTRY_URL }}
@@ -198,7 +197,7 @@ jobs:
     with:
       compose-file-cache-key: ''
       compose-file-cache-path: docker-compose.rendered.yml
-      server: https://app.uffizzi.com/
+      server: https://deployment-5843-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
