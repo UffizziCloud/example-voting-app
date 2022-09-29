@@ -1,6 +1,7 @@
 Example Voting App
 =========
 
+Test OSS contributor 2
 A simple distributed application running across multiple Docker containers.
 
 This example was originally at https://github.com/dockersamples/example-voting-app
