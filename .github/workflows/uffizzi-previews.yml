@@ -189,5 +189,6 @@ jobs:
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
+      id-token: write
       contents: read
       pull-requests: write
