@@ -172,6 +172,7 @@ jobs:
       url-password: ${{ secrets.URL_PASSWORD }}
       personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
     permissions:
+      id-token: write
       contents: read
       pull-requests: write
 
