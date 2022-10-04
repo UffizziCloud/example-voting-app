@@ -172,7 +172,7 @@ jobs:
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
-      server: https://ab54-62-4-33-119.ngrok.io
+      server: https://app.qa-gke.uffizzi.com/
     secrets:
       url-username: admin
       url-password: ${{ secrets.URL_PASSWORD }}
