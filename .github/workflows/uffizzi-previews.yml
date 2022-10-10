@@ -197,4 +197,3 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write
-      id-token: write
