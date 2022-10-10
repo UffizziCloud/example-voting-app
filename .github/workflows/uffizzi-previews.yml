@@ -182,7 +182,6 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write
-      id-token: write
 
   delete-uffizzi-preview:
     name: Use Remote Workflow to Delete an Existing Preview
