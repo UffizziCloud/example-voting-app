@@ -18,20 +18,18 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
+      - name: Generate UUID image name
+        id: uuid
+        run: echo "::set-output name=uuid::$(uuidgen)"
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/${{ github.repository_owner }}/example-voting-vote
-      - name: Build and Push Image to GitHub Container Registry
+          images: ttl.sh/${{ steps.uuid.outputs.uuid }}
+          tags: type=raw,value=24h
+      - name: Build and Push Image to ttl.sh ephemeral registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -46,20 +44,18 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
+      - name: Generate UUID image name
+        id: uuid
+        run: echo "::set-output name=uuid::$(uuidgen)"
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/${{ github.repository_owner }}/example-voting-worker
-      - name: Build and Push Image to GitHub Container Registry
+          images: ttl.sh/${{ steps.uuid.outputs.uuid }}
+          tags: type=raw,value=24h
+      - name: Build and Push Image to ttl.sh Ephemeral Registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -74,20 +70,18 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
+      - name: Generate UUID image name
+        id: uuid
+        run: echo "::set-output name=uuid::$(uuidgen)"
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/${{ github.repository_owner }}/example-voting-result
-      - name: Build and Push Image to GitHub Container Registry
+          images: ttl.sh/${{ steps.uuid.outputs.uuid }}
+          tags: type=raw,value=24h
+      - name: Build and Push Image to ttl.sh Ephemeral Registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -102,20 +96,18 @@ jobs:
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
-      - name: Login to Container Registry
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout git repo
         uses: actions/checkout@v3
+      - name: Generate UUID image name
+        id: uuid
+        run: echo "::set-output name=uuid::$(uuidgen)"
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/${{ github.repository_owner }}/example-voting-loadbalancer
-      - name: Build and Push Image to GitHub Container Registry
+          images: ttl.sh/${{ steps.uuid.outputs.uuid }}
+          tags: type=raw,value=24h
+      - name: Build and Push Image to ttl.sh Ephemeral Registry
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -187,6 +179,7 @@ jobs:
       docker-registry-password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       docker-registry-url: ${{ secrets.DOCKER_REGISTRY_URL }}
     permissions:
+      id-token: write
       contents: read
       pull-requests: write
       id-token: write
@@ -202,6 +195,7 @@ jobs:
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
+      id-token: write
       contents: read
       pull-requests: write
       id-token: write
