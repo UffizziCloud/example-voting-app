@@ -197,7 +197,7 @@ jobs:
     with:
       compose-file-cache-key: ''
       compose-file-cache-path: docker-compose.rendered.yml
-      server: https://deployment-6562-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com/
+      server: https://deployment-6567-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com/
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
