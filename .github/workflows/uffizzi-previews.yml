@@ -164,7 +164,7 @@ jobs:
     with:
       compose-file-cache-key: ${{ needs.render-compose-file.outputs.compose-file-cache-key }}
       compose-file-cache-path: docker-compose.rendered.yml
-      server: https://deployment-6305-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com/
+      server: https://deployment-6562-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com/
     secrets:
       url-username: admin
       url-password: ${{ secrets.URL_PASSWORD }}
@@ -190,7 +190,7 @@ jobs:
     with:
       compose-file-cache-key: ''
       compose-file-cache-path: docker-compose.rendered.yml
-      server: https://deployment-6272-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com/
+      server: https://deployment-6562-ufzi-on-ufzi-cp-internal-x0vlpg.app.uffizzi.com/
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
