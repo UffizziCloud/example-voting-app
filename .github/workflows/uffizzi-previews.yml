@@ -179,12 +179,6 @@ jobs:
       personal-access-token: ${{ secrets.GHCR_ACCESS_TOKEN }}
       dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      aws-registry-url: ${{ secrets.AWS_REGISTRY_URL }}
-      docker-registry-username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
-      docker-registry-password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
-      docker-registry-url: ${{ secrets.DOCKER_REGISTRY_URL }}
     permissions:
       contents: read
       pull-requests: write
