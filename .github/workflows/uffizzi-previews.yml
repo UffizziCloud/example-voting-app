@@ -191,7 +191,7 @@ jobs:
     with:
       compose-file-cache-key: ''
       compose-file-cache-path: docker-compose.rendered.yml
-      server: https://pr-396-deployment-6792-uffizzi-platform.app.uffizzi.com
+      server: https://pr-396-deployment-6292-uffizzi-platform.app.uffizzi.com
     secrets:
       password: ${{ secrets.UFFIZZI_PASSWORD }}
     permissions:
